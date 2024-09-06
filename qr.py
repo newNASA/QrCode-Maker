@@ -1,7 +1,7 @@
 import asyncio
 import qrcode
 import os
-from aiogram import types, Bot, Dispatcher
+from aiogram import F, types, Bot, Dispatcher
 from aiogram.filters import CommandStart
 bot = Bot(token="6896983459:AAFJO077XXLxKu8UTdTGR5tPBSxAvnoABPc")
 
@@ -11,7 +11,7 @@ dp = Dispatcher()
 async def get_message(message: types.Message):
     await message.answer("Assalomu alaykum botimizga xush kelibsiz! Xohlagan matningizni tashlang men sizga uni QR Code'ga aylantirib beraman")
     
-@dp.message()
+@dp.message(F.text)
 async def qr_send(message: types.Message):
     img = qrcode.make(message.text)
     img.save(f"{message.chat.id}.png")
